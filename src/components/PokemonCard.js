@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
+import Card from 'react-bootstrap/Card'; 
+import {FavoritesContext} from '../FavoritesProvider';
+import  {Button}  from 'react-bootstrap';
+
 
 function PokemonCard({ name }) {
+  const { addFavorite } = useContext(FavoritesContext);
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
@@ -39,6 +43,9 @@ function PokemonCard({ name }) {
             ))}
           </ul>
         </Card.Text>
+        <Button variant="primary" onClick={() => addFavorite(name)}>
+        Add to Favorites
+      </Button>
       </Card.Body>
     </Card>
   );
